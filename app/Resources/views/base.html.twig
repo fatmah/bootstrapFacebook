@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+          <base href="{{ app.request.scheme ~ '://' ~ app.request.httpHost }}" />
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    {% block javascripts %}
+       <script type="text/javascript" src="{{ asset('front/js/jquery-1.11.0.min.js') }}"></script>
+      <script type="text/javascript" src="{{ asset('front/js/uniform/jquery.uniform.js') }}"></script>
+      <script type="text/javascript" src="//connect.facebook.net/en_US/all.js"></script>
+        {% endblock %}
+      <script type="text/javascript">
+          $( document ).ready(function() {
+      $("#lang").change(function() {
+    	  path = "{{ path('projet_first_changlocal',{'locale': "var", 'PHPSESSID': session.getId() }) }}";
+
+    	  document.location.href= path.replace("var",$(this).val());
+    	});
+          FB.init({
+             appId: {{ app_id }},
+             status: true,
+             cookie: true,
+             xfbml: true,
+             oauth: true
+          });
+          FB.Canvas.setSize({height:600});
+          setTimeout("FB.Canvas.setAutoGrow()",500);
+          (function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/all.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+      });
+          </script>
+    <body>
+    	<div id="fb-root"></div>
+                   <form>
+                  <select id="lang">
+                     <option value="fr" {% if app.request.locale == "fr" %}selected{% endif %}>Français</option>
+                     <option value="en"  {% if app.request.locale == "en" %}selected{% endif %}>English</option>
+                     <option value="es" {% if app.request.locale == "es" %}selected{% endif %}>Español</option>
+                     <option value="de"  {% if app.request.locale == "de" %}selected{% endif %}>Deutsch</option>
+                     <option value="it"  {% if app.request.locale == "it" %}selected{% endif %}>Italiano</option>
+                     <option value="pt"  {% if app.request.locale == "pt" %}selected{% endif %}>Português</option>
+                     <option value="ru"  {% if app.request.locale == "ru" %}selected{% endif %}>Russe</option>
+                      </select>
+               </form>
+        {% block body %}{% endblock %}
+
+    </body>
+</html>

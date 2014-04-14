@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+{{ app.request.locale }}
+{% trans %}Hello{% endtrans %}
+{% if fan %}
+ fan
+{% else %}
+ not fan
+{% endif %}
+<a href="{{ path('projet_first_test') }}">test</a>
+<script type="text/javascript">
+   $(document).ready(function() {
+
+	   {% if loginUrl is not null %}
+	   var url = "{{ loginUrl }}";
+	   newUrl = url.replace('amp;','');
+	   FB.getLoginStatus(function(response) {
+		   if (response.status === 'connected') {
+
+			  // the user is logged in and has authenticated your app, and response.authResponse supplies
+			 // the user's ID, a valid access token, a signed request, and the time the access token and signed request each expire
+
+		   } else if (response.status === 'not_authorized') {
+			    // the user is logged in to Facebook, but has not authenticated your app
+			   
+			   FB.login(function(response) {
+    			   if (response.authResponse) {
+    			    	FB.api('/me', function(response2) {
+    			       console.log('Good to see you, ' + response2.name + '.');
+    			     });
+    			   } else {
+    				   console.log('User cancelled login or did not fully authorize.');
+    			   }
+    			 });
+		   } else {
+			   // the user isn't logged in to Facebook.
+			   FB.login(function(response) {
+			   });
+			  }
+	   });
+	    		
+	       
+	   {% endif %}
+   	});
+</script>
+{% endblock %}

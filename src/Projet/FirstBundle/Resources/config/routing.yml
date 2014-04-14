@@ -1,0 +1,9 @@
+projet_first_homepage:
+    pattern:  /
+    defaults: { _controller: ProjetFirstBundle:Default:index }
+projet_first_changlocal:
+    pattern:  /loc/{locale}
+    defaults: { _controller: ProjetFirstBundle:Default:changLocal,locale: null }
+projet_first_test:
+    pattern:  /test
+    defaults: { _controller: ProjetFirstBundle:Default:test }
