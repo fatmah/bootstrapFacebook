@@ -36,11 +36,8 @@ class LocaleListener implements EventSubscriberInterface
 			}
 			else
 			{
-				$user = $this->facebook->getUser();
-
          			$fb_pages = $this->container->getParameter('fb_pages');
          			$default_page = $this->container->getParameter('default_page');
-         			$signed_request = $this->facebook->getSignedRequest();
          			$url_page = null;
          			$no_page = false;
 

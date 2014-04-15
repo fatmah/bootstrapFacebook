@@ -12,7 +12,7 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
 
-    	$session = $this->getRequest()->getSession();
+    	$session = $request->getSession();
 		$loginUrl = null;
 		$pageIds = null;
     	$fan = false;
@@ -42,6 +42,7 @@ class DefaultController extends Controller
     
         return $this->render('ProjetFirstBundle:Default:index.html.twig', array('fan' => $fan , 'loginUrl' => $loginUrl));
     }
+    
     public function changLocalAction(Request $request,$locale)
     {
     	$request->getSession()->set('_locale', $locale);
@@ -62,6 +63,7 @@ class DefaultController extends Controller
     	 
     	return new RedirectResponse($referer);
     }
+    
     public function testAction()
     {
     	return $this->render('ProjetFirstBundle:Default:test.html.twig', array());
