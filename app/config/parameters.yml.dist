@@ -13,3 +13,30 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+    page_id: '569230436507409'
+    app_id: '275915562570027'
+    url_app: 'https://sandboxkaris.com/app_dev.php/'
+    default_page:
+        '569230436507409':
+            default: en
+            locales:
+                - de
+                - en
+                - es
+                - fr
+                - it
+                - pt
+                - ru
+            url_page: 'https://www.facebook.com/pages/Page-de-test/569230436507409?id=569230436507409&sk=app_275915562570027'
+    fb_pages:
+        '569230436507409':
+            default: fr
+            locales:
+                - de
+                - en
+                - es
+                - fr
+                - it
+                - pt
+                - ru
+            url_page: 'https://www.facebook.com/pages/Page-de-test/569230436507409?id=569230436507409&sk=app_275915562570027'

@@ -33,6 +33,8 @@ class AppKernel extends Kernel
         	new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
         	//facebook
         	new FOS\FacebookBundle\FOSFacebookBundle(),
+            //suncat
+        	new SunCat\MobileDetectBundle\MobileDetectBundle(),
         	//projet
             new Projet\FirstBundle\ProjetFirstBundle(),
         );

@@ -6,6 +6,7 @@ imports:
     - { resource: bundles/sonata_media.yml }
     - { resource: bundles/sonata_user.yml }
     - { resource: bundles/fos_facebook.yml }
+    - { resource: bundles/suncat_detect_mobile.yml }
 parameters:
     session.storage.options: {use_cookies: 0, url_rewriter.tags: 'a=href,area=href,frame=src,input=src,form=action', use_only_cookies: 0, use_trans_sid: 1}
     
