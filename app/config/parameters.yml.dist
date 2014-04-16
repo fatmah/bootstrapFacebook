@@ -16,6 +16,8 @@ parameters:
     page_id: '569230436507409'
     app_id: '275915562570027'
     url_app: 'https://sandboxkaris.com/app_dev.php/'
+    proxy_url: 'https://sandboxkaris.com/app_dev.php/smart'
+    domaine_share: 'https://sandboxkaris.com/app_dev.php/'
     default_page:
         '569230436507409':
             default: en
