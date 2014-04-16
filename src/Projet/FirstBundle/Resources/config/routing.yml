@@ -8,5 +8,5 @@ projet_first_test:
     pattern:  /test
     defaults: { _controller: ProjetFirstBundle:Default:test }
 projet_first_proxy:
-    pattern:  /smart/{local}
-    defaults: { _controller: ProjetFirstBundle:Default:proxy,local: en }
+    pattern:  /smart/{locale}
+    defaults: { _controller: ProjetFirstBundle:Default:proxy,locale: en }

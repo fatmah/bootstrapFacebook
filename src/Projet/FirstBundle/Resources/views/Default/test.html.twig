@@ -20,7 +20,7 @@
 	   	{% set route = app.request.scheme ~ '://' ~ app.request.httpHost %}
 	  	var src_img = "https://sandboxkaris.com/images/image.jpeg";
 	  	var text1 = "teeeeeeeeeeeeeeeeeext ";
-		var long_url_twitter = "{{ url('projet_first_proxy') }}";
+		var long_url_twitter = "{{ url('projet_first_proxy',{'locale':  app.request.locale}) }}";
 		var tumblr_link_url = "https://sandboxkaris.com/images/image.jpeg";
 		var tumblr_link_name = "Test";
 		{% set pageId = null %}
