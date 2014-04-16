@@ -1,3 +1,7 @@
+projet_mobile:
+    resource: "@ProjetMobileBundle/Resources/config/routing.yml"
+    prefix:   /mobile
+
 projet_first:
     resource: "@ProjetFirstBundle/Resources/config/routing.yml"
     prefix:   /

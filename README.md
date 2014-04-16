@@ -20,4 +20,4 @@ c'est un sandbox pour les applications facebook il contient:
 ainsi que :
 
 
-phpmd/phpmd, squizlabs/php_codesniffer et sebastian/phpcpd pour l'integration contenu
+phpmd, php_codesniffer et phpcpd pour l'integration contenu

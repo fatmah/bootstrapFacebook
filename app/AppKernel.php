@@ -37,6 +37,7 @@ class AppKernel extends Kernel
         	new SunCat\MobileDetectBundle\MobileDetectBundle(),
         	//projet
             new Projet\FirstBundle\ProjetFirstBundle(),
+            new Projet\MobileBundle\ProjetMobileBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

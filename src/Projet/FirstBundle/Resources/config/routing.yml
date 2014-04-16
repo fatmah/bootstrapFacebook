@@ -7,3 +7,6 @@ projet_first_changlocal:
 projet_first_test:
     pattern:  /test
     defaults: { _controller: ProjetFirstBundle:Default:test }
+projet_first_proxy:
+    pattern:  /smart/{local}
+    defaults: { _controller: ProjetFirstBundle:Default:proxy,local: en }

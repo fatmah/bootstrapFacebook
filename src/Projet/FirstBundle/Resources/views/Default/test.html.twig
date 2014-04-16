@@ -1,4 +1,111 @@
 {% extends "::base.html.twig" %}
 {% block body %}
 {% trans %} test_pag{% endtrans %}
+<br/>
+						<div class="share partage-video">
+							<ul>
+								<li class="facebook"><a href="javascript:void(0)">facebook</a></li>
+								<li class="twitter"><a id="twitter_" title="twitter" href="javascript:void(0)">twitter</a></li>
+								<li class="pinterest"><a id="pinit_" title="pinit" href="javascript:void(0)">pinterest</a></li>
+								<li class="thumblr"><a id="tumblr_" title="tumb" href="javascript:void(0)">thumblr</a></li>
+							</ul>
+						</div>
+						<div id="twitter_text" style="display: none;"></div>
+
+			<script type="text/javascript">
+
+   $(document).ready(function() {
+		var login = "o_2s4h92gt6t";
+		var api_key = "R_7a4ea51d3e2e43bbb7be493fa3657f78";
+	   	{% set route = app.request.scheme ~ '://' ~ app.request.httpHost %}
+	  	var src_img = "https://sandboxkaris.com/images/image.jpeg";
+	  	var text1 = "teeeeeeeeeeeeeeeeeext ";
+		var long_url_twitter = "{{ url('projet_first_proxy') }}";
+		var tumblr_link_url = "https://sandboxkaris.com/images/image.jpeg";
+		var tumblr_link_name = "Test";
+		{% set pageId = null %}
+		{% set link = null %}
+ 
+ 
+ 		{% for key,value in default_page %}
+ 		{% set link = value['url_page'] %}
+ 		{% set pageId = key %}
+ 		{% endfor %}
+ 
+ 		var long_url = "{{ link }}";
+
+	   $('.facebook').click(function () {
+		     u=src_img;
+		    t='';
+		    var fbtitle = "fbtitle";
+		    var fbsummary = "partage fb";
+		    var url = long_url_twitter;
+		
+	   			FB.ui({
+	   				method: 'feed',
+	   				name: 'namefb',
+	   				link: url,
+	   				picture: src_img,
+	   				caption: "captionfb",
+	   				description: "descriiiptionfb",
+	   			});
+	 
+		   });
+	   
+	   $.ajax({
+		   url:"https://api-ssl.bitly.com/v3/shorten",
+		   data:{longUrl: long_url_twitter,apiKey: api_key,login: login},
+		   dataType:"jsonp",
+		   success:function(v)
+		   {
+		   bit_url=v.data.url;
+		   $("#twitter_text").text(bit_url);
+			
+		   }
+		   });
+	   $('a#twitter_').click( function() { 
+		   var tiny_url = null;
+		   var raccourci = "";
+		  tiny_url = $("#twitter_text").text();
+			if(tiny_url.length > 0){
+				   raccourci = 'https://twitter.com/home?status='+text1+'aaaa'+tiny_url ;
+				 	window.open(raccourci, 'popup', 'height=350,width=700');
+					
+			}
+			 
+		 });
+
+		 //share pinit
+	   $('a#pinit_').click( function() { 
+		   var tiny_url = null;
+		   var raccourci = "";
+		  tiny_url = $("#twitter_text").text();
+			if(tiny_url.length > 0){
+				raccourci = "http://pinterest.com/pin/create/button/?url="+tiny_url+"&media={{ route }}{{ asset('images/image.jpg')}}&description=descriptionpinit "+tiny_url;
+		   	     
+		   	       window.open(raccourci, 'name', 'height=350,width=700');
+		   	    	
+			}
+			 
+		 });
+		//share tumbr
+	   $('a#tumblr_').click( function() { 
+		   var tiny_url = null;
+		   var raccourci = "";
+		  tiny_url = $("#twitter_text").text();
+			if(tiny_url.length > 0){
+				var tumblr_link_description = text1+'thimbr'+tiny_url
+				raccourci = "http://www.tumblr.com/share/link?url=" + encodeURIComponent(tiny_url) + "&name=" + encodeURIComponent(tumblr_link_name)+ "&description=" + encodeURIComponent(tumblr_link_description);
+		   	     
+		   	       window.open(raccourci, 'name', 'height=350,width=700');
+		   	    	
+			}
+			 
+		 });
+   });
+
+
+   
+</script>
+
 {% endblock %}

@@ -40,6 +40,7 @@ twig:
         session: "@session"
         fb_pages: "%fb_pages%"
         default_page: "%default_page%"
+        domaine_share: "%domaine_share%"
 
 # Assetic Configuration
 assetic:

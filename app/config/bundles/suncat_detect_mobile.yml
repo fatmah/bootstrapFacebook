@@ -2,7 +2,7 @@ mobile_detect:
     redirect:
         mobile:
             is_enabled: true            # default false
-            host: https://sandboxkaris.com/app_dev.php/mobile/     # with scheme (http|https), default null, url validate
+            host: https://sandboxkaris.com   # with scheme (http|https), default null, url validate
             status_code: 301            # default 302
             action: redirect   
         tablet: 

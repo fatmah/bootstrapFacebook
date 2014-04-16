@@ -68,4 +68,65 @@ class DefaultController extends Controller
     {
     	return $this->render('ProjetFirstBundle:Default:test.html.twig', array());
     }
+    
+    public function proxyAction(Request $request, $local)
+    {
+    	$request->getSession()->set('origin_locale', $local);
+    	$request->getSession()->set('origin_page', $this->getFacebookAppFromLocale($local, true));
+    	$request->setLocale($local);
+    
+    	$first = $request->getSession()->get('first');
+    	if ($local && empty($first)) {
+    		$request->getSession()->set('_locale', $local);
+    		$request->getSession()->set('first', true);
+    	} else {
+    		$current_local = $request->getSession()->get('_locale');
+    		$request->getSession()->set('_locale', $current_local);
+    	}
+    	$agent = $request->headers->get('User-Agent');
+    
+    	if ($this->userAgentIsCrawler($agent) == false ) {
+    		$mobileDetector = $this->get('mobile_detect.mobile_detector');
+    		if ($mobileDetector->isMobile() && !$mobileDetector->isTablet()) { //Mobile
+    			
+    			return $this->forward('ProjetMobileBundle:Mobile:login', array('local' => $local));
+    		} else { //Desktop
+    
+    			return $this->redirect($this->getFacebookAppFromLocale($local));
+    		}
+    	} else { //Facebook Crawler
+    
+    		return $this->render('ProjetFirstBundle:Default:opengraph.html.twig', array('local' => $local));
+    	}
+    
+    }
+    
+    protected function getFacebookAppFromLocale($locale = 'en', $get_id = false)
+    {
+    	$fb_pages = $this->container->getParameter('fb_pages');
+    	foreach ($fb_pages as $key => $value) {
+    		if ($value['default'] == $locale) {
+    			if ($get_id) return $key;
+    			return $value['url_page'];
+    		}
+    	}
+    	$default_page = $this->container->getParameter('default_page');
+    	foreach ($default_page as $key => $value) {
+    		if ($value['default'] == $locale) {
+    			if ($get_id) return $key;
+    			return $value['url_page'];
+    		}
+    	}
+    
+    	return 'http://'.$this->container->getParameter('proxy_url');
+    }
+    
+    protected function userAgentIsCrawler($agent)
+    {
+    	if ((strpos(strtolower($agent), 'facebookexternalhit') !== false) || (strpos(strtolower($agent), 'linkedinbot') !== false)  ) {
+    		return  true;
+    	}
+    
+    	return false;
+    }
 }
