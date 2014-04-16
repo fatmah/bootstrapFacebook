@@ -1,0 +1,3 @@
+projet_mobile_homepage:
+    pattern:  /login/{local}
+    defaults: { _controller: ProjetMobileBundle:Mobile:login }

@@ -1,0 +1,7 @@
+parameters:
+#    projet_mobile.example.class: Projet\MobileBundle\Example
+
+services:
+#    projet_mobile.example:
+#        class: %projet_mobile.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
