@@ -16,7 +16,6 @@ class DefaultController extends Controller
 		$loginUrl = null;
 		$pageIds = null;
     	$fan = false;
-
     		$facebook = $this->get('fos_facebook.api');
     		$user = $facebook->getUser();
     		$liked = null;
@@ -69,15 +68,15 @@ class DefaultController extends Controller
     	return $this->render('ProjetFirstBundle:Default:test.html.twig', array());
     }
     
-    public function proxyAction(Request $request, $local)
+    public function proxyAction(Request $request, $locale)
     {
-    	$request->getSession()->set('origin_locale', $local);
-    	$request->getSession()->set('origin_page', $this->getFacebookAppFromLocale($local, true));
-    	$request->setLocale($local);
+    	$request->getSession()->set('origin_locale', $locale);
+    	$request->getSession()->set('origin_page', $this->getFacebookAppFromLocale($locale, true));
+    	$request->setLocale($locale);
     
     	$first = $request->getSession()->get('first');
-    	if ($local && empty($first)) {
-    		$request->getSession()->set('_locale', $local);
+    	if ($locale && empty($first)) {
+    		$request->getSession()->set('_locale', $locale);
     		$request->getSession()->set('first', true);
     	} else {
     		$current_local = $request->getSession()->get('_locale');
@@ -89,20 +88,21 @@ class DefaultController extends Controller
     		$mobileDetector = $this->get('mobile_detect.mobile_detector');
     		if ($mobileDetector->isMobile() && !$mobileDetector->isTablet()) { //Mobile
     			
-    			return $this->forward('ProjetMobileBundle:Mobile:login', array('local' => $local));
+    			return $this->forward('ProjetMobileBundle:Mobile:login', array('locale' => $locale));
     		} else { //Desktop
     
-    			return $this->redirect($this->getFacebookAppFromLocale($local));
+    			return $this->redirect($this->getFacebookAppFromLocale($locale));
     		}
     	} else { //Facebook Crawler
     
-    		return $this->render('ProjetFirstBundle:Default:opengraph.html.twig', array('local' => $local));
+    		return $this->render('ProjetFirstBundle:Default:opengraph.html.twig', array('local' => $locale));
     	}
     
     }
     
     protected function getFacebookAppFromLocale($locale = 'en', $get_id = false)
-    {
+    {   	
+    	print_r($locale);
     	$fb_pages = $this->container->getParameter('fb_pages');
     	foreach ($fb_pages as $key => $value) {
     		if ($value['default'] == $locale) {
@@ -123,10 +123,15 @@ class DefaultController extends Controller
     
     protected function userAgentIsCrawler($agent)
     {
-    	if ((strpos(strtolower($agent), 'facebookexternalhit') !== false) || (strpos(strtolower($agent), 'linkedinbot') !== false)  ) {
-    		return  true;
-    	}
-    
-    	return false;
+       if (
+        		(strpos(strtolower($agent), 'facebookexternalhit') !== false) || 
+        		(strpos(strtolower($agent), 'linkedinbot') !== false)   ||
+        		(strpos(strtolower($agent), '+https://developers.google.com/+/web/snippet/') !== false)
+        	)
+        {
+            return  true;
+        }
+
+        return false;
     }
 }
