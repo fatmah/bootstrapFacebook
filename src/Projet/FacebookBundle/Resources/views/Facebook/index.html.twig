@@ -1,9 +1,10 @@
 {% extends "::base.html.twig" %}
 {% block body %}
 <br>
-test custom facebook bundle:
+{% trans %}test{% endtrans %} :
 <ul>
 <li>function isFan from manager : {% if fan %} yes {% else %} no {% endif %}</li>
+<li>your local on facebook is : {{ locale }}</li>
 </ul>
 
 {% endblock %}
