@@ -10,9 +10,10 @@ class FacebookController extends Controller
     {
     	$facebook = $this->get('projet_facebook.facebook_manager');
     	$fan = $facebook->isFan();
+    	$locale = $facebook->getLocalFb();
     	//$facebook->testLogin(); 
 
-        return $this->render('ProjetFacebookBundle:Facebook:index.html.twig', array('fan'=>$fan));
+        return $this->render('ProjetFacebookBundle:Facebook:index.html.twig', array('fan'=>$fan,'locale'=>$locale));
     }
     
 
