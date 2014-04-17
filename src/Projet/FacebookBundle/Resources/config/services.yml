@@ -1,0 +1,14 @@
+parameters:
+    projet_facebook.facebook_manager.class: Projet\FacebookBundle\Manager\FacebookManager
+    config:
+        appId: %fos_facebook.app_id%
+        secret: %fos_facebook.secret%
+        cookie: %fos_facebook.cookie%
+        domain: %fos_facebook.domain%
+
+services:
+    projet_facebook.facebook_manager:
+        class: %projet_facebook.facebook_manager.class%
+        arguments: 
+            1: %config%
+            2: @Session

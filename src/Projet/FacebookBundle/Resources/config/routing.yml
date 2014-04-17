@@ -1,0 +1,3 @@
+projet_facebook_homepage:
+    pattern:  /
+    defaults: { _controller: ProjetFacebookBundle:Facebook:index }
