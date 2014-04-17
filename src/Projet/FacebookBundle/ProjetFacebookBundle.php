@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Container;
 
 class ProjetFacebookBundle extends Bundle
 {
-	private $container;
+	protected $container;
 	
 	public function __construct(Container $container) {
 		$this->container = $container;
