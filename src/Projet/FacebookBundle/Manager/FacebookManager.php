@@ -53,6 +53,39 @@ class FacebookManager extends FacebookSessionPersistence {
 			}
 		}
 
+		/**
+		 * set signed request in session
+		 *
+		 * @return array signed_request
+		 */
+		public function getSignedRequestSession()
+		{
+			$signed_request = $this->getSignedRequest();
+			if(isset($signed_request))
+			{
+				$this->session->set('signed_request', $signed_request);
+			}
+			return $this->session->get('signed__request',$signed_request);
+		}
+		
+		/**
+		 * get mode facebook (canvas or onglet page)
+		 *
+		 * @return mode string
+		 */
+		public function getMode()
+		{
+			$signed_request = getSignedRequestSession();
+			if(isset($signed_request))
+			{
+				if(isset($signed_request['page']))
+				{
+					return 'page';
+				}
+			}
+			return 'canvas';
+		}
+		
 	
 
 }
