@@ -14,11 +14,7 @@
         {% endblock %}
       <script type="text/javascript">
           $( document ).ready(function() {
-      $("#lang").change(function() {
-    	  path = "{{ path('projet_first_changlocal',{'locale': "var", 'PHPSESSID': session.getId() }) }}";
 
-    	  document.location.href= path.replace("var",$(this).val());
-    	});
           FB.init({
              appId: {{ app_id }},
              status: true,
@@ -31,17 +27,7 @@
           </script>
     <body>
     	<div id="fb-root"></div>
-                   <form>
-                  <select id="lang">
-                     <option value="fr" {% if app.request.locale == "fr" %}selected{% endif %}>Français</option>
-                     <option value="en"  {% if app.request.locale == "en" %}selected{% endif %}>English</option>
-                     <option value="es" {% if app.request.locale == "es" %}selected{% endif %}>Español</option>
-                     <option value="de"  {% if app.request.locale == "de" %}selected{% endif %}>Deutsch</option>
-                     <option value="it"  {% if app.request.locale == "it" %}selected{% endif %}>Italiano</option>
-                     <option value="pt"  {% if app.request.locale == "pt" %}selected{% endif %}>Português</option>
-                     <option value="ru"  {% if app.request.locale == "ru" %}selected{% endif %}>Russe</option>
-                      </select>
-               </form>
+  
         {% block body %}{% endblock %}
 
     </body>
