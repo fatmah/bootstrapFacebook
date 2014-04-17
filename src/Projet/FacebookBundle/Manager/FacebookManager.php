@@ -15,22 +15,15 @@ class FacebookManager extends FacebookSessionPersistence {
 
 		public function isFan()
 		{
-			$fan = false;
-			$user = $this->getUser();
-			$liked = null;
-			$pageIds= null;
-			$signed_request = $this->getSignedRequest();
-			if(isset($signed_request['page']))
+			$signed_request = $this->getSignedRequestSession();
+			if($this->getMode() == 'page')
 			{
-				$pageIds = $signed_request['page']['id'];
-				$liked = $signed_request['page']['liked'];
+				if ($signed_request['page']['liked'] == true) {
+					return true;
+				}
 			}
-			$pageId = $this->session->get('pageId', $pageIds);
-			$fan= $this->session->get('fan',$liked );
-			$this->session->set('pageId', $pageId);
-			$this->session->set('fan', $fan);
-			return $fan;
-		}
+			return false;
+			}
 		
 		public function testLogin()
 		{
@@ -53,6 +46,39 @@ class FacebookManager extends FacebookSessionPersistence {
 			}
 		}
 
+		/**
+		 * set signed request in session
+		 *
+		 * @return array signed_request
+		 */
+		public function getSignedRequestSession()
+		{
+			$signed_request = $this->getSignedRequest();
+			if(isset($signed_request))
+			{
+				$this->session->set('signed_request', $signed_request);
+			}
+			return $this->session->get('signed__request',$signed_request);
+		}
+		
+		/**
+		 * get mode facebook (canvas or onglet page)
+		 *
+		 * @return mode string
+		 */
+		public function getMode()
+		{
+			$signed_request = $this->getSignedRequestSession();
+			if(isset($signed_request))
+			{
+				if(isset($signed_request['page']))
+				{
+					return 'page';
+				}
+			}
+			return 'canvas';
+		}
+		
 	
 
 }
