@@ -46,8 +46,8 @@ class FacebookManager extends FacebookSessionPersistence {
 				}
 			}
 			else {
-				$fbUrl = $this->getLoginUrl();
-				header("Location:".$fbUrl);
+				$loginUrl = $this->getLoginUrl();
+				header("Location:".$loginUrl); 
 				exit();
 				return false;
 			}
