@@ -49,7 +49,7 @@ class FacebookManager extends FacebookSessionPersistence {
 				$loginUrl = $this->getLoginUrl();
 				header("Location:".$loginUrl); 
 				exit();
-				return false;
+				
 			}
 		}
 
