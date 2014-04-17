@@ -15,22 +15,15 @@ class FacebookManager extends FacebookSessionPersistence {
 
 		public function isFan()
 		{
-			$fan = false;
-			$user = $this->getUser();
-			$liked = null;
-			$pageIds= null;
-			$signed_request = $this->getSignedRequest();
-			if(isset($signed_request['page']))
+			$signed_request = getSignedRequestSession();
+			if($this->getMode() == 'page')
 			{
-				$pageIds = $signed_request['page']['id'];
-				$liked = $signed_request['page']['liked'];
+				if ($signed_request['page']['liked'] == true) {
+					return true;
+				}
 			}
-			$pageId = $this->session->get('pageId', $pageIds);
-			$fan= $this->session->get('fan',$liked );
-			$this->session->set('pageId', $pageId);
-			$this->session->set('fan', $fan);
-			return $fan;
-		}
+			return false;
+			}
 		
 		public function testLogin()
 		{
