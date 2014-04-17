@@ -3,7 +3,7 @@ parameters:
 services:
     projet_locale.locale_listener:
         class: Projet\FirstBundle\EventListner\LocaleListener
-        arguments: ["%kernel.default_locale%",@fos_facebook.api,@service_container]
+        arguments: ["%kernel.default_locale%",@projet_facebook.facebook_manager,@service_container]
         tags:
             - { name: kernel.event_subscriber, priority: 100 }
         

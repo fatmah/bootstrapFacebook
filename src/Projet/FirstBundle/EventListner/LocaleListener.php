@@ -36,36 +36,9 @@ class LocaleListener implements EventSubscriberInterface
 			}
 			else
 			{
-         			$fb_pages = $this->container->getParameter('fb_pages');
-         			$default_page = $this->container->getParameter('default_page');
-         			$url_page = null;
-         			$no_page = false;
-
-         			foreach ($fb_pages as $key => $value)
-         			{
-         				if($key == $page_ids)
-         				{
-         					$default_locale = $value['default'];
-         					$url_page = $value['url_page'];
-         					$request->getSession()->set('url_page', $url_page);
-         					$request->getSession()->set('_locale', $default_locale);
-         					$request->setLocale($default_locale);
-         					$no_page = true;
-         				}
-         			}
-         			if(false == $no_page)
-         			{
-         				
-         				foreach ($default_page as $key => $value)
-         				{
-         					$request->getSession()->set('url_page', $value['url_page']);
-         					$request->getSession()->set('_locale', $value['default']);
-         					$request->setLocale($value['default']);
-         					break;
-         				}
-         			}
-
-        		//}
+                $locale = $this->facebook->getLocalFb();
+				$request->getSession()->set('_locale', $locale);
+				$request->setLocale($locale);
         	
         	} 
 		}
