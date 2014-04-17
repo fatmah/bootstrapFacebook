@@ -16,6 +16,7 @@ class FacebookManager extends FacebookSessionPersistence {
 		public function isFan()
 		{
 			$signed_request = $this->getSignedRequestSession();
+			var_dump($signed_request);
 			if($this->getMode() == 'page')
 			{
 				if ($signed_request['page']['liked'] == true) {
@@ -58,7 +59,7 @@ class FacebookManager extends FacebookSessionPersistence {
 			{
 				$this->session->set('signed_request', $signed_request);
 			}
-			return $this->session->get('signed__request',$signed_request);
+			return $this->session->get('signed_request',$signed_request);
 		}
 		
 		/**
