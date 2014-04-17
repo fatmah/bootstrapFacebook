@@ -10,7 +10,10 @@ class FacebookManager extends FacebookSessionPersistence {
 		parent::__construct($config, $session);
 
 	}
-
+	/**
+	 * check if user liked the page or not
+	 * @return boolean
+	 */
 	public function isFan() {
 
 		$signed_request = $this->getSignedRequestSession();
@@ -23,6 +26,9 @@ class FacebookManager extends FacebookSessionPersistence {
 		return false;
 	}
 
+	/**
+	 * check if user is connected or not
+	 */
 	public function testLogin() {
 
 		$user = $this->getUser();
@@ -71,7 +77,10 @@ class FacebookManager extends FacebookSessionPersistence {
 		return 'canvas';
 	}
 
-	public function getLocalFb(){
+	/**
+	 * get the locale of the facebook user
+	 */
+	public function getLocalFb() {
 		$signed_request = $this->getSignedRequestSession();
 		return $signed_request['user']['locale'];
 	}
