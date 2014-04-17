@@ -1,10 +1,14 @@
+projet_facebook:
+    resource: "@ProjetFacebookBundle/Resources/config/routing.yml"
+    prefix:   /
+
 projet_mobile:
     resource: "@ProjetMobileBundle/Resources/config/routing.yml"
     prefix:   /mobile
 
 projet_first:
     resource: "@ProjetFirstBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /first
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
     prefix: /admin

@@ -38,6 +38,7 @@ class AppKernel extends Kernel
         	//projet
             new Projet\FirstBundle\ProjetFirstBundle(),
             new Projet\MobileBundle\ProjetMobileBundle(),
+            new Projet\FacebookBundle\ProjetFacebookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
